@@ -12,11 +12,8 @@ Route::get('/podium', function() {
     return view('podium');
 })->name('podium');
 
-Route::get('task', [TaskController::class, 'index'])->name('task.index');
-Route::get('task/create', [TaskController::class, 'create'])->name('task.create');
-Route::post('task/store', [TaskController::class, 'store'])->name('task.store');
-Route::get('task/show/{id}', [TaskController::class, 'show'])->name('task.show');
-Route::delete('task/destroy/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
+
+Route::resource('/task', TaskController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
