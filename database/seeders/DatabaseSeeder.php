@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +15,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Reset cached roles and permissions
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        User::factory()->create([
+        // tasks
+        Permission::create(['name' => 'create tasks']);
+        Permission::create(['name' => 'edit tasks']);
+        Permission::create(['name' => 'delete tasks']);
+
+        // assignments
+        Permission::create(['name' => 'turn in assigments']);
+
+        // admin permissions
+        $adminRole = Role::create(['name' => 'admin']);
+        $adminRole->givePermissionTo(['create tasks', 'edit tasks', 'delete tasks']);
+
+        // user permissions
+        $userRole = Role::create(['name' => 'user']);
+        $userRole->givePermissionTo(['turn in assignments']);
+
+        $admin = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'password' => env("ADMIN_PASSWORD"),
         ]);
+
+        $admin->assignRole($adminRole);
     }
 }

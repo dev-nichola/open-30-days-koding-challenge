@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class AssignmentController extends Controller
+class AssignmentController extends Controller implements HasMiddleware
 {
+    /**
+     * get middlewares that should be assigned to AssigmentController
+     * */
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:admin', except: ['index'])
+        ];
+    }
+
     public function create()
     {
         return view('assignments.index');
