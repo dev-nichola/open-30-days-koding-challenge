@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Assignment extends Model
 {
     protected $guarded = ['id'];
+    protected $fillable = [
+        'task',
+        'due_date',
+        'repository_link',
+        'description',
+    ];
 }

@@ -6,6 +6,7 @@ use App\Models\Assignment;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\View\View;
 
 class AssignmentController extends Controller implements HasMiddleware
 {
@@ -19,9 +20,9 @@ class AssignmentController extends Controller implements HasMiddleware
         ];
     }
 
-    public function create()
+    public function create(): View
     {
-        return view('assignments.index');
+        return view('assignments.create');
     }
 
     public function store(Request $request)
@@ -43,7 +44,7 @@ class AssignmentController extends Controller implements HasMiddleware
         ]);
 
         // Redirect ke halaman list assignment dengan pesan sukses
-        return redirect()->back();
+        return redirect()->route('assignments.index');
     }
 
     public function index()

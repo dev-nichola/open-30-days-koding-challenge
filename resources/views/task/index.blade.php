@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-8 px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="py-4 flex justify-end">
             @can('create tasks')
                 <a href="{{ route('task.create') }}">
