@@ -17,7 +17,7 @@
     </head>
     <body class="font-sans antialiased">
         <x-toaster-hub /> <!-- 👈 -->
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-300">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
