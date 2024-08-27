@@ -14,7 +14,7 @@
                         {{ __('Malem Minggu Solving Assignment') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('task.index')" :active="request()->routeIs('task.index')">
+                    <x-nav-link :href="route('assignments.index')" :active="request()->routeIs('assignments.index')">
                         {{ __('Main Assignment') }}
                     </x-nav-link>
 
