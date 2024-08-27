@@ -64,15 +64,26 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $task = Task::query()->findOrFail($id);
+
+        return view('task.edit', ['task' => $task]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RequestCreateTask $request, string $id)
     {
-        //
+        $task = Task::query()->findOrFail($id);
+        $input = $request->validated();
+
+        $task->title = $input['title'];
+        $task->goal = $input['goal'];
+        $task->task = $input['task'];
+
+        $task->saveOrFail();
+
+        return redirect()->route('task.index');
     }
 
     /**

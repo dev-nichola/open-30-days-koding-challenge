@@ -47,7 +47,7 @@
                                                 class="text-white inline-flex items-center px-3 py-1 gap-x-1 text-sm font-semibold rounded-md border border-transparent bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white dark:bg-yellow-600 dark:hover:bg-yellow-400 dark:focus:ring-blue-400 transition ease-in-out duration-150">
                                                 Detail Task
                                             </a>
-                                            <a href=""
+                                            <a href="{{route('task.edit', $task->id)}}"
                                                 class="text-white inline-flex items-center px-3 py-1 gap-x-1 text-sm font-semibold rounded-md border border-transparent bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-400 transition ease-in-out duration-150">
                                                 Edit
                                             </a>
