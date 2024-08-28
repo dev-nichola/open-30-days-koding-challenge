@@ -23,9 +23,9 @@ class AssignmentController extends Controller implements HasMiddleware
         ];
     }
 
-    public function create()
+    public function create(): View
     {
-        return view('assignments.index');
+        return view('assignments.create');
     }
 
     public function store(Request $request)
