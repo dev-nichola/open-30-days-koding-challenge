@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     // partial, some accessible by user some only admin
-    Route::resource('/assignments', AssignmentController::class)->except(['create', 'edit','update']);
+    Route::resource('/assignments', AssignmentController::class);
     Route::resource('/task', TaskController::class);
 
     Route::get('/podium', function () {
