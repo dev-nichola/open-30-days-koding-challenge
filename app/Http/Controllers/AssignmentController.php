@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Models\Task;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+use Masmerise\Toaster\Toaster;
 
 class AssignmentController extends Controller implements HasMiddleware
 {
@@ -16,7 +19,7 @@ class AssignmentController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('role:admin', except: ['index'])
+            new Middleware('role:admin', except: ['index', 'store'])
         ];
     }
 
@@ -28,30 +31,65 @@ class AssignmentController extends Controller implements HasMiddleware
     public function store(Request $request)
     {
         // Validasi data yang masuk
-        $validated = $request->validate([
-            'task' => 'required|string|max:255',
-            'due_date' => 'required|date',
-            'repository_link' => 'required|url',
-            'description' => 'required|string',
+        $request->validate([
+            'task_id' => 'required|string|max:255|unique:assignments',
+            'date' => 'required|date',
+            'repository' => 'required',
+            'note' => 'required|string|min:10',
         ]);
 
         // Membuat assignment baru menggunakan data yang sudah divalidasi
-        Assignment::create([
-            'task' => $validated['task'],
-            'due_date' => $validated['due_date'],
-            'repository_link' => $validated['repository_link'],
-            'description' => $validated['description'],
+        Assignment::query()->create([
+            'task_id' => $request->task_id,
+            'date' => $request->date,
+            'repository' => $request->repository,
+            'note' => $request->note,
+            'user_id' => $request->user()->id
         ]);
 
         // Redirect ke halaman list assignment dengan pesan sukses
-        return redirect()->route('assignments.index');
+        Toaster::success('Sukses Bro Sukses');
+        return redirect()->back();
     }
 
     public function index()
     {
-        // Mendapatkan semua assignment dari database
-        $assignments = Assignment::all();
 
-        return view('assignments.index', compact('assignments'));
+        $userId = Auth::user()->id;
+        // Mendapatkan semua assignment dari database
+        $assignments = Assignment::query()->where('user_id', $userId)->get();
+
+        // Get task from db
+        $task = Task::query()->get();
+
+        return view('assignments.index', [
+            'assignments' => $assignments,
+            'tasks' => $task
+        ]);
+    }
+
+    public function destroy($id)
+    {
+
+        $assignment = Assignment::query()->findOrFail($id);
+
+        if (!$assignment) {
+            Toaster::error('Mohon maaf tidak bisa menghapus data karena ada alasan lain hal');
+        }
+
+        $assignment->delete();
+
+        Toaster::success('Sukses menghapus data');
+        return redirect()->back();
+    }
+
+    public function show(Assignment $assignment)
+    {
+        return response()->json([
+            'task' => $assignment->task,
+            'date' => $assignment->date,
+            'repository' => $assignment->repository,
+            'note' => $assignment->note,
+        ]);
     }
 }

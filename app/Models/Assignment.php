@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Assignment extends Model
 {
-    protected $guarded = ['id'];
     protected $fillable = [
-        'task',
-        'due_date',
-        'repository_link',
-        'description',
+        'task_id', 'date', 'repository', 'note', 'user_id'
     ];
+
+    public function task() {
+        return $this->belongsTo(Task::class, 'task_id', 'id');
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
 }

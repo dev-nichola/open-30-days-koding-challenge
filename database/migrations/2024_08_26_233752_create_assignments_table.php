@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->string('task');
-            $table->date('due_date');
-            $table->string('repository_link');
-            $table->text('description');
+            $table->foreignId('task_id');
+            $table->foreignId('user_id');
+            $table->date('date');
+            $table->string('repository');
+            $table->text('note');
             $table->timestamps();
         });
     }

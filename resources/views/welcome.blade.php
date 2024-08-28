@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-
-    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-DaN8u4V-.css') }}"> --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
 
     <title>{{ config('app.name') }}</title>
     <style>
@@ -17,30 +15,16 @@
             font-family: 'Poppins', sans-serif;
             color: #000;
         }
-        .bg-white {
-            background-color: #fff; /* Ensure background color is white */
-        }
-        .text-gray-900 {
-            color: #000; /* Override gray color to black */
-        }
-        .text-gray-800 {
-            color: #000; /* Override gray color to black */
-        }
-        .text-red-500 {
-            color: #f00; /* Red color for links */
-        }
-        .text-blue-500 {
-            color: #007bff; /* Blue color for links */
-        }
+
     </style>
 </head>
 <body>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white dark:text-black overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-black dark:text-gray-900 space-y-6">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:text-black">
+                <div class="space-y-6 p-6 text-black dark:text-gray-900">
 
-                    <div class="flex lg:hidden lg:flex-row gap-4 text-blue-600">
+                    <div class="flex gap-4 text-blue-600 lg:hidden lg:flex-row">
                         @if(auth()->check())
                         <a href="{{ route('task.index') }}" class="text-lg hover:underline">My Task</a>
                         @else
@@ -51,9 +35,9 @@
 
                     <div class="flex flex-col lg:flex-row lg:justify-between">
                         <div class="mb-4 lg:mb-0">
-                            <h1 class="text-4xl lg:text-5xl py-10 font-bold">Hola Programmer!</h1>
+                            <h1 class="py-10 text-4xl font-bold lg:text-5xl">Hola Programmer!</h1>
                         </div>
-                        <div class="lg:flex hidden lg:flex-row gap-4 text-blue-600">
+                        <div class="hidden gap-4 text-blue-600 lg:flex lg:flex-row">
                             @if(auth()->check())
                             <a href="{{ route('task.index') }}" class="text-lg hover:underline">My Task</a>
                             @else
@@ -85,10 +69,10 @@
                         <h1 class="text-2xl font-bold">Malam Minggu Solving? 🫨</h1>
                         <p>Jadi, setiap malam Minggu kita adakan live coding! Live coding...?, yap, kita bakal ngesolve problem yang ada.</p>
                         <p>Eh, maksudnya gimana? Jadi...</p>
-                        <ol class="list-decimal list-inside space-y-2">
+                        <ol class="list-inside list-decimal space-y-2">
                             <li>Pas Sabtu siang, admin bakal ngasih form yang intinya kalau ada ide, taruh saja di situ.</li>
                             <li>Langkah keduanya, admin bakal menyeleksi ide-ide yang cukup menantang dan disesuaikan tentunya (admin di sini punya hak prerogatif ya...)</li>
-                            <li>Nah, pas malamnya kita live bareng di Discord (entar ya Discord-nya lagi dibikin...)</li>
+                            <li>Nah, pas malamnya kita live bareng di Discord (<a href="https://discord.gg/qtpTvKva" class="font-extrabold text-red-500">LINK DC</a>)</li>
                             <li>Cara menentukan siapa yang live coding gimana? Yang pertama, kita list dulu ya sebelum live siapa yang mau ikutan. Admin bakal infoin nanti di WhatsApp. Trus nih kita pake <a href="https://wheelofnames.com/" class="text-red-500">Wheelspin dong...</a></li>
                             <li>Trus moderatornya siapa? Admin? Atau kenalan admin? Hmmm nanti moderatornya bakal di <a href="https://wheelofnames.com/" class="text-red-500">Wheelspin lagi dong...</a></li>
                         </ol>
@@ -156,5 +140,7 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('app-DjkJwC9y.js') }}"></script>
 </body>
 </html>
